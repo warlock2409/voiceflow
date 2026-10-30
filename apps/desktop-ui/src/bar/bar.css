@@ -1,0 +1,122 @@
+html,
+body.bar-body {
+  margin: 0;
+  background: transparent;
+  overflow: hidden;
+  font-family: "Segoe UI Variable", "Segoe UI", system-ui, sans-serif;
+  user-select: none;
+}
+
+#root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 40px;
+  padding: 0 6px 0 12px;
+  border-radius: 999px;
+  background: rgba(24, 24, 27, 0.92);
+  color: #f4f4f5;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  font-size: 13px;
+  box-sizing: border-box;
+}
+
+.pill__indicator {
+  display: inline-flex;
+  color: #a1a1aa;
+}
+
+.pill--recording .pill__indicator {
+  color: #f87171;
+  animation: pulse 1.2s ease-in-out infinite;
+}
+.pill--completed .pill__indicator {
+  color: #4ade80;
+}
+.pill--error .pill__indicator {
+  color: #fbbf24;
+}
+
+.pill__status {
+  min-width: 92px;
+  white-space: nowrap;
+  font-weight: 500;
+}
+
+.pill__timer {
+  font-variant-numeric: tabular-nums;
+  color: #d4d4d8;
+}
+
+.pill__btn {
+  height: 28px;
+  min-width: 28px;
+  padding: 0 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.08);
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+.pill__btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.16);
+}
+.pill__btn:focus-visible {
+  outline: 2px solid #93c5fd;
+  outline-offset: 1px;
+}
+.pill__btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.pill__btn--primary {
+  background: #f4f4f5;
+  color: #18181b;
+  font-weight: 600;
+}
+.pill__btn--primary:hover:not(:disabled) {
+  background: #ffffff;
+}
+.pill__btn--ghost {
+  border-color: transparent;
+  background: transparent;
+  padding: 0 6px;
+}
+
+.spin {
+  animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes pulse {
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spin,
+  .pill--recording .pill__indicator {
+    animation: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .pill {
+    border: 1px solid CanvasText;
+    background: Canvas;
+    color: CanvasText;
+  }
+}
