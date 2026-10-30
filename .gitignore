@@ -1,0 +1,8 @@
+node_modules/
+dist/
+src-tauri/target/
+src-tauri/gen/
+*.log
+# Speech models are downloaded at runtime into the app data dir; never commit them.
+*.bin
+!src-tauri/resources/ggml-silero-v5.1.2.bin

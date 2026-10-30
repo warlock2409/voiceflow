@@ -1,0 +1,7 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "Least privilege: event listening for both windows. App commands are invoked from Rust-registered handlers; no plugin JS APIs (clipboard, shortcuts) are exposed to the webviews.",
+  "windows": ["main", "bar"],
+  "permissions": ["core:event:default"]
+}

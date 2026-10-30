@@ -1,0 +1,55 @@
+[package]
+name = "voiceflow"
+version = "0.1.0"
+description = "VoiceFlow Desktop - local AI voice dictation"
+edition = "2021"
+rust-version = "1.80"
+
+[lib]
+name = "voiceflow_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = [] }
+tauri-plugin-global-shortcut = "2"
+tauri-plugin-clipboard-manager = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+thiserror = "2"
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "sync", "fs", "io-util"] }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+cpal = "0.18"
+rubato = "5"
+whisper-rs = "0.16"
+reqwest = { version = "0.13", default-features = false, features = ["rustls", "stream", "blocking", "json"] }
+futures-util = "0.3"
+sha2 = "0.11"
+hex = "0.4"
+hound = { version = "3.5", optional = true }
+
+[target.'cfg(windows)'.dependencies]
+windows = { version = "0.62", features = [
+    "Win32_Foundation",
+    "Win32_UI_WindowsAndMessaging",
+    "Win32_UI_Input_KeyboardAndMouse",
+    "Win32_System_LibraryLoader",
+    "Win32_System_Threading",
+    "Win32_Security_Credentials",
+] }
+
+[dev-dependencies]
+hound = "3.5"
+
+[features]
+# Optional NVIDIA acceleration for whisper.cpp (requires CUDA toolkit at build time).
+cuda = ["whisper-rs/cuda"]
+# Test builds only: VOICEFLOW_E2E_WAV=<16 kHz mono wav> replaces the microphone.
+e2e-audio = ["dep:hound"]
+
+[profile.dev.package."*"]
+# whisper.cpp inference is unusably slow unoptimised; keep deps fast in dev builds.
+opt-level = 3
